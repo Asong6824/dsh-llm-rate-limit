@@ -1,0 +1,21 @@
+- insert:
+    - id: llm-rate-limit
+      name: dsh-llm-rate-limit
+      config:
+        providers:
+          deepseek-official:
+            requests:
+              perMinute: 30
+              burst: 1
+            maxConcurrentRequests: 2
+            queue:
+              maxSize: 100
+              maxWaitMs: 300000
+              auxiliary: reject
+            cooldown:
+              codes: [RATE_LIMIT, SERVER]
+              statuses: [429, 529]
+              initialDelayMs: 500
+              maxDelayMs: 60000
+              maxProviderDelayMs: 3600000
+              jitterRatio: 0.1
