@@ -1,7 +1,7 @@
 {
   "name": "dsh-llm-rate-limit",
-  "version": "0.1.0",
-  "description": "Provider-scoped proactive rate limiting for DeepSeek Harness",
+  "version": "0.1.1",
+  "description": "LLM API rate limiting, concurrency control, queuing, and adaptive cooldown for DeepSeek Harness",
   "type": "module",
   "main": "lib/index.js",
   "types": "lib/types/index.d.ts",
@@ -28,6 +28,7 @@
     "lib/types/**/*.d.ts",
     "README.md",
     "README.zh.md",
+    "llms.txt",
     "LICENSE"
   ],
   "dsh": {
@@ -57,10 +58,19 @@
   "homepage": "https://github.com/Asong6824/dsh-llm-rate-limit#readme",
   "keywords": [
     "deepseek-harness",
+    "deepseek",
+    "deepseek-api",
     "dsh",
     "dsh-plugin",
     "rate-limit",
-    "llm"
+    "rate-limiter",
+    "api-rate-limit",
+    "token-bucket",
+    "concurrency-limit",
+    "llm",
+    "llm-agent",
+    "volcengine-ark",
+    "http-429"
   ],
   "license": "MIT",
   "peerDependencies": {

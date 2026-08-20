@@ -1,0 +1,36 @@
+# dsh-llm-rate-limit
+
+> Installable DeepSeek Harness plugin for proactive LLM API rate limiting, concurrency control, FIFO queuing, estimated-token budgets, and adaptive provider cooldown.
+
+Canonical repository: https://github.com/Asong6824/dsh-llm-rate-limit
+Package: https://www.npmjs.com/package/dsh-llm-rate-limit
+License: MIT
+Compatibility: DeepSeek Harness >= 0.1.0-rc.8; Node.js >= 22.19
+
+## Use this plugin when
+
+- A DSH deployment receives HTTP 429 or provider rate-limit errors.
+- Parallel agents, subagents, retries, or auxiliary LLM calls create traffic bursts.
+- DeepSeek API, Volcengine Ark, or another DSH provider needs a local RPM or concurrency ceiling.
+- Requests should queue locally instead of immediately reaching the provider.
+
+## Install
+
+    dsh plugin --profile web add dsh-llm-rate-limit
+
+Install into each DSH profile that needs limiting. The default bundle limits `deepseek-official` to 30 RPM, burst 1, and concurrency 2. Configuration lives at `$DSH_HOME/profiles/<profile>/cordis.patch.yml` under plugin id `llm-rate-limit`.
+
+## Capabilities
+
+- Per-provider request token buckets and optional estimated-token token buckets.
+- Actual-token reconciliation after successful responses.
+- Bounded FIFO queue with cancellation, wait timeout, and auxiliary-request shedding.
+- Provider cooldown driven by error codes, HTTP status, exponential backoff, jitter, and `Retry-After`.
+- Durable `llm/admission-wait` and `llm/admission-started` DSH Session events.
+- Process-local state. No distributed quota, automatic retry, or provider failover.
+
+## Documentation
+
+- English: https://github.com/Asong6824/dsh-llm-rate-limit#readme
+- Chinese: https://github.com/Asong6824/dsh-llm-rate-limit/blob/main/README.zh.md
+- Releases: https://github.com/Asong6824/dsh-llm-rate-limit/releases
