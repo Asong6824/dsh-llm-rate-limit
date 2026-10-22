@@ -8,6 +8,7 @@ import z from '@deepseek-ai/schemastery';
 export type { AdmissionWaitReason, LlmAdmissionStartedEventData, LlmAdmissionWaitEventData } from './types.ts';
 export { AdmissionWaitId } from './brand.ts';
 export declare const name = "llm-rate-limit";
+/** Injected services. v0.1.2 no longer injects `sessions`: the plugin does not touch the Session log. */
 export declare const inject: string[];
 /** Request-token bucket configuration for one provider. */
 export interface RequestLimitConfig {
