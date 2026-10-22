@@ -1,16 +1,19 @@
+/**
+ * Session-event type augmentations for dsh-llm-rate-limit.
+ *
+ * v0.1.2: the plugin no longer writes `llm/admission-wait` or
+ * `llm/admission-started` events — those types are outside the engine's
+ * KNOWN_SESSION_EVENT_TYPES vocabulary, and a live `Session.append()` cannot
+ * set the `ignorable: true` marker, so every session that recorded such an
+ * event became permanently unloadable. The interfaces are retained solely to
+ * type legacy events written by 0.1.0 and earlier; they are no longer
+ * declared on SessionEventMap because the plugin never produces them.
+ */
 import type { AdmissionWaitId } from './brand.ts';
 export type { AdmissionWaitId };
-declare module '@deepseek-ai/dsh-session/types' {
-    interface SessionEventMap {
-        /** Durable, non-surface record written before one model call waits for local provider admission. */
-        'llm/admission-wait': LlmAdmissionWaitEventData;
-        /** Durable transition written after local admission succeeds and immediately before provider dispatch. */
-        'llm/admission-started': LlmAdmissionStartedEventData;
-    }
-}
 /** Capacity that prevented a model call from entering its provider immediately. */
 export type AdmissionWaitReason = 'cooldown' | 'concurrency' | 'queue' | 'requests' | 'tokens';
-/** Durable payload recorded before one model call enters the local admission queue. */
+/** Legacy payload recorded by 0.1.0 and earlier before one model call entered the local admission queue. */
 export interface LlmAdmissionWaitEventData {
     waitId: AdmissionWaitId;
     provider: string;
@@ -18,7 +21,7 @@ export interface LlmAdmissionWaitEventData {
     maxWaitMs: number;
     purpose?: 'compaction' | 'session-title';
 }
-/** Durable transition recorded after admission succeeds. */
+/** Legacy transition recorded by 0.1.0 and earlier after admission succeeded. */
 export interface LlmAdmissionStartedEventData {
     waitId: AdmissionWaitId;
     provider: string;

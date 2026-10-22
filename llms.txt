@@ -5,7 +5,7 @@
 Canonical repository: https://github.com/Asong6824/dsh-llm-rate-limit
 Package: https://www.npmjs.com/package/dsh-llm-rate-limit
 License: MIT
-Compatibility: DeepSeek Harness >= 0.1.0-rc.8; Node.js >= 22.19
+Compatibility: DeepSeek Harness >= 0.1.0-rc.8 (including 0.2.x); Node.js >= 22.19
 
 ## Use this plugin when
 
@@ -26,7 +26,7 @@ Install into each DSH profile that needs limiting. The default bundle limits `de
 - Actual-token reconciliation after successful responses.
 - Bounded FIFO queue with cancellation, wait timeout, and auxiliary-request shedding.
 - Provider cooldown driven by error codes, HTTP status, exponential backoff, jitter, and `Retry-After`.
-- Durable `llm/admission-wait` and `llm/admission-started` DSH Session events.
+- Does not write to the DSH Session log (v0.1.2 removed the custom admission events that made sessions unloadable).
 - Process-local state. No distributed quota, automatic retry, or provider failover.
 
 ## Documentation
